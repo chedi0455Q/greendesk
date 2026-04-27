@@ -1,7 +1,7 @@
-<!-- ===== FIN DU CONTENU PRINCIPAL ===== -->
+
 </main>
 
-<!-- ===== PIED DE PAGE ===== -->
+
 <footer class="site-footer" id="contact">
     <div class="container footer-inner">
 
@@ -31,7 +31,6 @@
     </div>
 
     <div class="footer-bottom">
-        <!-- La fonction date() de PHP retourne l'année courante dynamiquement -->
         <p>&copy; <?= date('Y') ?> Green Desk — Projet BTS SIO SLAM</p>
     </div>
 </footer>

@@ -1,41 +1,31 @@
 <?php
-// ============================================================
-//  details.php — Détail d'un espace + formulaire de réservation
-// ============================================================
 
 require_once 'db.php';
 
-// --- 1. Récupération et validation de l'identifiant dans l'URL ---
-// $_GET['id'] contient la valeur passée après ?id= dans l'URL
-// (int) force la conversion en entier → protection basique contre les injections
+
 
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
-// Si l'id est invalide (0 ou négatif), on redirige vers l'accueil
+
 if ($id <= 0) {
     header('Location: index.php');
-    exit; // Toujours appeler exit() après header() !
+    exit;
 }
 
-// --- 2. Requête en base de données ---
+
 $espace = getEspaceById($id);
 
-// Si l'espace n'existe pas en BDD, on redirige aussi
 if (!$espace) {
     header('Location: index.php');
     exit;
 }
 
-// --- 3. Gestion du formulaire de réservation ---
-$message_confirm = ''; // Message de confirmation à afficher
-$erreurs = [];         // Tableau d'erreurs de validation
 
-// On vérifie si le formulaire a été soumis (méthode POST)
+$message_confirm = ''; 
+$erreurs = [];         
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    // --- Récupération et nettoyage des données du formulaire ---
-    // trim() : supprime les espaces en début/fin de chaîne
-    // htmlspecialchars() : convertit les caractères spéciaux (sécurité XSS)
     $nom_client  = trim(htmlspecialchars($_POST['nom']   ?? ''));
     $email       = trim(htmlspecialchars($_POST['email'] ?? ''));
     $date_resa   = trim($_POST['date']  ?? '');
@@ -43,11 +33,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $duree       = (int)($_POST['duree'] ?? 0);
     $message     = trim(htmlspecialchars($_POST['message'] ?? ''));
 
-    // --- Validation des champs ---
     if (empty($nom_client)) {
         $erreurs[] = 'Votre nom est requis.';
     }
-    // filter_var : fonction PHP native pour valider un email
+  
     if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $erreurs[] = 'Adresse e-mail invalide ou manquante.';
     }
@@ -61,18 +50,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $erreurs[] = 'La durée doit être comprise entre 1 et 8 heures.';
     }
 
-    // --- Si aucune erreur : traitement de la réservation ---
+
     if (empty($erreurs)) {
-        // Calcul du prix total : prix_heure × durée
+   
         $prix_total = $espace['prix_heure'] * $duree;
 
-        // En situation réelle, on ferait : INSERT INTO reservations (...)
-        // Ici c'est simulé : on affiche juste un message de confirmation
         $message_confirm = sprintf(
             'Merci <strong>%s</strong> ! Votre réservation pour <strong>%s</strong> le <strong>%s à %s</strong> (%dh) est enregistrée. Total : <strong>%.2f €</strong>.',
             $nom_client,
             $espace['nom'],
-            date('d/m/Y', strtotime($date_resa)), // Formatage de la date
+            date('d/m/Y', strtotime($date_resa)), 
             $heure_debut,
             $duree,
             $prix_total
@@ -80,13 +67,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// --- 4. Titre de la page ---
 $page_title = $espace['nom'];
 
 require_once 'header.php';
 ?>
 
-<!-- ===== FIL D'ARIANE (breadcrumb) ===== -->
 <nav class="breadcrumb">
     <div class="container">
         <a href="index.php">Accueil</a>
@@ -97,13 +82,10 @@ require_once 'header.php';
     </div>
 </nav>
 
-<!-- ===== PAGE DÉTAIL ===== -->
+
 <div class="container detail-layout">
 
-    <!-- ===== COLONNE GAUCHE : Infos de l'espace ===== -->
     <article class="detail-main">
-
-        <!-- Image principale -->
         <?php if (!empty($espace['image_url'])) : ?>
         <div class="detail-image-wrapper">
             <img
@@ -115,7 +97,6 @@ require_once 'header.php';
         </div>
         <?php endif; ?>
 
-        <!-- Nom et méta-infos -->
         <div class="detail-header">
             <h1 class="detail-title"><?= htmlspecialchars($espace['nom']) ?></h1>
             <div class="detail-meta">
@@ -129,11 +110,10 @@ require_once 'header.php';
         <!-- Description complète -->
         <div class="detail-description">
             <h2>À propos de cet espace</h2>
-            <!-- nl2br() : convertit les retours à la ligne \n en <br> HTML -->
+
             <p><?= nl2br(htmlspecialchars($espace['description'])) ?></p>
         </div>
 
-        <!-- Équipements complets -->
         <div class="detail-equipements">
             <h2>Équipements inclus</h2>
             <?= getEquipements($espace['equipements']) ?>
@@ -141,7 +121,6 @@ require_once 'header.php';
 
     </article>
 
-    <!-- ===== COLONNE DROITE : Formulaire de réservation ===== -->
     <aside class="detail-sidebar">
         <div class="resa-card">
 
@@ -152,14 +131,12 @@ require_once 'header.php';
                 </p>
             </div>
 
-            <!-- Message de confirmation (affiché après soumission réussie) -->
             <?php if (!empty($message_confirm)) : ?>
                 <div class="alert alert-success">
                     ✅ <?= $message_confirm ?>
                 </div>
             <?php endif; ?>
 
-            <!-- Affichage des erreurs de validation -->
             <?php if (!empty($erreurs)) : ?>
                 <div class="alert alert-error">
                     <strong>Veuillez corriger les erreurs suivantes :</strong>
@@ -171,12 +148,9 @@ require_once 'header.php';
                 </div>
             <?php endif; ?>
 
-            <!-- LE FORMULAIRE -->
-            <!-- method="post" : les données sont envoyées dans le corps de la requête HTTP -->
-            <!-- action="" : on soumet sur la même page (details.php?id=X) -->
             <form method="post" action="" class="resa-form">
 
-                <!-- Champ caché : on passe l'id de l'espace pour savoir ce qu'on réserve -->
+            
                 <input type="hidden" name="espace_id" value="<?= (int)$espace['id'] ?>">
 
                 <div class="form-group">
@@ -206,7 +180,7 @@ require_once 'header.php';
                 <div class="form-row">
                     <div class="form-group">
                         <label for="date">Date *</label>
-                        <!-- min : empêche de réserver dans le passé -->
+        
                         <input
                             type="date"
                             id="date"
@@ -261,13 +235,13 @@ require_once 'header.php';
 
             </form>
 
-        </div><!-- /.resa-card -->
+        </div>
 
-        <!-- Lien retour -->
+
         <a href="index.php" class="btn-back">← Voir tous les espaces</a>
 
     </aside>
 
-</div><!-- /.detail-layout -->
+</div>
 
 <?php require_once 'footer.php'; ?>
