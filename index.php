@@ -27,9 +27,9 @@ require_once 'header.php';
             <p>Des prix clairs, à la réservation à l'heure.</p>
         </div>
         <?php if (!empty($espaces)) : ?>
-
+ 
             <div class="espaces-grid">
-
+ 
                 <?php foreach ($espaces as $espace) : ?>
                 <article class="espace-card">
                     <div class="card-image">
@@ -38,8 +38,10 @@ require_once 'header.php';
                                 src="<?= htmlspecialchars($espace['image_url']) ?>"
                                 alt="Photo de <?= htmlspecialchars($espace['nom']) ?>"
                                 loading="lazy"
-                                onerror="this.style.display='none'"
+                                onerror="this.style.display='none'; this.parentElement.classList.add('img-fallback');"
                             >
+                        <?php else : ?>
+                            <div class="img-fallback-static"></div>
                         <?php endif; ?>
                         <div class="card-capacity-badge">
                             👥 <?= (int)$espace['capacite'] ?> pers. max
@@ -61,12 +63,12 @@ require_once 'header.php';
                             </a>
                         </div>
                     </div>
-
+ 
                 </article>
                 <?php endforeach; ?>
-
+ 
             </div>
-
+ 
         <?php else : ?>
             <p class="no-results">Aucun espace disponible pour le moment. Revenez bientôt !</p>
         <?php endif; ?>
@@ -74,28 +76,28 @@ require_once 'header.php';
 </section>
 <section class="avantages-section">
     <div class="container avantages-grid">
-
+ 
         <div class="avantage-item">
             <span class="avantage-icon">⚡</span>
             <h4>Réservation instantanée</h4>
             <p>Confirmez votre créneau en moins de 2 minutes.</p>
         </div>
-
+ 
         <div class="avantage-item">
             <span class="avantage-icon">🌱</span>
             <h4>Espaces éco-responsables</h4>
             <p>Énergie verte, plantes, matériaux naturels.</p>
         </div>
-
+ 
         <div class="avantage-item">
             <span class="avantage-icon">🔒</span>
             <h4>Sans engagement</h4>
             <p>Payez uniquement ce que vous consommez.</p>
         </div>
-
+ 
     </div>
 </section>
-
+ 
 <?php
 require_once 'footer.php';
 ?>
