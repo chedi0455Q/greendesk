@@ -1,116 +1,90 @@
-/* ============================================================
-   style.css — Green Desk | BTS SIO SLAM
-   Palette Nature : Vert sapin, Blanc cassé, Gris anthracite
-   Design : Business épuré avec touches organiques
-============================================================ */
 
-
-/* ============================================================
-   1. VARIABLES CSS (le "dictionnaire" de couleurs et polices)
-   Changer une valeur ici l'applique partout dans le fichier
-============================================================ */
 :root {
-    /* --- Couleurs principales --- */
-    --vert-sapin:    #2D5016;   /* Vert foncé principal */
-    --vert-moyen:    #4A7C2F;   /* Vert moyen pour les accents */
-    --vert-clair:    #7DB05A;   /* Vert clair pour les badges */
-    --vert-pale:     #E8F0DF;   /* Vert très pâle pour les fonds */
-
-    --blanc-casse:   #F7F4EF;   /* Fond général de la page */
+    --vert-sapin:    #2D5016;  
+    --vert-moyen:    #4A7C2F;  
+    --vert-clair:    #7DB05A;   
+    --vert-pale:     #E8F0DF;   
+    --blanc-casse:   #F7F4EF;   
     --blanc-pur:     #FFFFFF;
-
-    --gris-anthracite: #2C2C2C; /* Texte principal */
-    --gris-moyen:    #5A5A5A;   /* Texte secondaire */
-    --gris-clair:    #C8C8C8;   /* Bordures */
-    --gris-pale:     #F0EDE8;   /* Fonds alternatifs */
-
-    /* --- Typographie --- */
-    --font-titre:    'Playfair Display', Georgia, serif; /* Élégant, pour les titres */
-    --font-corps:    'DM Sans', sans-serif;              /* Moderne et lisible */
-
-    /* --- Espacements --- */
+ 
+    --gris-anthracite: #2C2C2C; 
+    --gris-moyen:    #5A5A5A;   
+    --gris-clair:    #C8C8C8;   
+    --gris-pale:     #F0EDE8;   
+ 
+    --font-titre:    'Playfair Display', Georgia, serif; 
+    --font-corps:    'DM Sans', sans-serif;              
+ 
     --container-max: 1200px;
     --gap-sm:        0.75rem;
     --gap-md:        1.5rem;
     --gap-lg:        3rem;
     --gap-xl:        5rem;
-
-    /* --- Effets --- */
+ 
     --radius:        12px;
     --radius-sm:     6px;
     --shadow-card:   0 2px 16px rgba(45, 80, 22, 0.10);
     --shadow-hover:  0 8px 32px rgba(45, 80, 22, 0.18);
     --transition:    0.25s ease;
 }
-
-
-/* ============================================================
-   2. RESET & BASE
-   Normalisation des comportements navigateur
-============================================================ */
+ 
+ 
 *, *::before, *::after {
-    box-sizing: border-box; /* Le padding ne s'ajoute plus à la taille */
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
-
+ 
 html {
-    scroll-behavior: smooth; /* Défilement fluide pour les liens # */
+    scroll-behavior: smooth; 
     font-size: 16px;
 }
-
+ 
 body {
     font-family:      var(--font-corps);
     background-color: var(--blanc-casse);
     color:            var(--gris-anthracite);
     line-height:      1.65;
 }
-
+ 
 img {
     max-width: 100%;
     display:   block;
 }
-
+ 
 a {
     color:           var(--vert-sapin);
     text-decoration: none;
     transition:      color var(--transition);
 }
 a:hover { color: var(--vert-moyen); }
-
-
-/* ============================================================
-   3. UTILITAIRES
-============================================================ */
-
-/* Centrage horizontal avec largeur max */
+ 
+ 
+ 
 .container {
     max-width: var(--container-max);
     margin:    0 auto;
     padding:   0 1.5rem;
 }
-
-
-/* ============================================================
-   4. HEADER / NAVIGATION
-============================================================ */
+ 
+ 
 .site-header {
-    position:         sticky;  /* Reste en haut lors du scroll */
+    position:         sticky; 
     top:              0;
     z-index:          100;
     background-color: var(--blanc-pur);
     border-bottom:    2px solid var(--vert-pale);
     box-shadow:       0 2px 12px rgba(0,0,0,0.06);
 }
-
+ 
 .header-inner {
     display:         flex;
     align-items:     center;
     justify-content: space-between;
     height:          70px;
 }
+ 
 
-/* Logo */
 .logo {
     display:     flex;
     align-items: center;
@@ -121,7 +95,7 @@ a:hover { color: var(--vert-moyen); }
 .logo-icon  { font-size: 1.6rem; }
 .logo-text  { font-family: var(--font-titre); }
 .logo strong { color: var(--vert-sapin); }
-
+ 
 /* Navigation */
 .main-nav {
     display:     flex;
@@ -129,8 +103,7 @@ a:hover { color: var(--vert-moyen); }
     gap:         2rem;
     font-weight: 500;
 }
-
-/* Bouton dans la nav */
+ 
 .btn-nav {
     background-color: var(--vert-sapin);
     color:            var(--blanc-pur) !important;
@@ -143,28 +116,25 @@ a:hover { color: var(--vert-moyen); }
     background-color: var(--vert-moyen);
     transform:        translateY(-1px);
 }
+ 
+ 
 
-
-/* ============================================================
-   5. SECTION HERO
-============================================================ */
 .hero {
     background: linear-gradient(135deg, var(--vert-sapin) 0%, var(--vert-moyen) 100%);
     color:       var(--blanc-pur);
     padding:     var(--gap-xl) 0;
     overflow:    hidden;
 }
-
+ 
 .hero-inner {
     display:         flex;
     align-items:     center;
     justify-content: space-between;
     gap:             var(--gap-lg);
 }
-
+ 
 .hero-text { max-width: 600px; }
-
-/* Petite étiquette au-dessus du titre */
+ 
 .hero-label {
     display:          inline-block;
     background-color: rgba(255,255,255,0.15);
@@ -176,26 +146,23 @@ a:hover { color: var(--vert-moyen); }
     text-transform:   uppercase;
     margin-bottom:    1rem;
 }
-
-/* Titre principal du hero */
+ 
 .hero-text h1 {
     font-family: var(--font-titre);
-    font-size:   clamp(2.2rem, 5vw, 3.5rem); /* clamp() = responsive sans media query */
+    font-size:   clamp(2.2rem, 5vw, 3.5rem); 
     line-height: 1.15;
     margin-bottom: var(--gap-md);
 }
 .hero-text h1 em {
     font-style:  italic;
-    color:       #A8D080; /* Vert doux pour mettre en valeur le mot clé */
+    color:       #A8D080; 
 }
-
+ 
 .hero-text p {
     font-size:   1.1rem;
     opacity:     0.85;
     margin-bottom: var(--gap-md);
 }
-
-/* Bouton CTA */
 .btn-primary {
     display:          inline-block;
     background-color: var(--blanc-pur);
@@ -209,10 +176,10 @@ a:hover { color: var(--vert-moyen); }
     transform:   translateY(-3px);
     box-shadow:  0 8px 24px rgba(0,0,0,0.2);
 }
+ 
 
-/* Badge circulaire décoratif */
 .hero-badge {
-    flex-shrink: 0; /* Ne se rétrécit pas */
+    flex-shrink: 0; 
 }
 .badge-circle {
     width:            150px;
@@ -236,21 +203,18 @@ a:hover { color: var(--vert-moyen); }
     opacity:     0.8;
     line-height: 1.3;
 }
+ 
 
-/* Animation de rotation */
 @keyframes rotate {
     from { transform: rotate(0deg); }
     to   { transform: rotate(360deg); }
 }
-
-
-/* ============================================================
-   6. SECTION ESPACES — EN-TÊTE + GRILLE
-============================================================ */
+ 
+ 
 .espaces-section {
     padding: var(--gap-xl) 0;
 }
-
+ 
 .section-header {
     text-align:    center;
     margin-bottom: var(--gap-lg);
@@ -265,23 +229,19 @@ a:hover { color: var(--vert-moyen); }
     color:     var(--gris-moyen);
     font-size: 1.05rem;
 }
-
-/* Grille responsive : 1 colonne → 2 → 3 selon la largeur */
+ 
 .espaces-grid {
     display:               grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap:                   var(--gap-md);
 }
-
-
-/* ============================================================
-   7. CARTES ESPACE
-============================================================ */
+ 
+ 
 .espace-card {
     background:    var(--blanc-pur);
     border-radius: var(--radius);
     box-shadow:    var(--shadow-card);
-    overflow:      hidden; /* Les coins arrondis s'appliquent à l'image */
+    overflow:      hidden; 
     display:       flex;
     flex-direction: column;
     transition:    transform var(--transition), box-shadow var(--transition);
@@ -290,9 +250,10 @@ a:hover { color: var(--vert-moyen); }
     transform:   translateY(-5px);
     box-shadow:  var(--shadow-hover);
 }
-
+ 
 /* Bloc image */
 .card-image {
+    background-color: var(--vert-pale); 
     position:   relative;
     height:     210px;
     background: linear-gradient(135deg, var(--vert-pale), var(--gris-pale));
@@ -301,14 +262,14 @@ a:hover { color: var(--vert-moyen); }
 .card-image img {
     width:      100%;
     height:     100%;
-    object-fit: cover; /* L'image remplit le conteneur sans se déformer */
+    object-fit: cover; 
     transition: transform 0.4s ease;
 }
 .espace-card:hover .card-image img {
-    transform: scale(1.04); /* Zoom subtil au survol */
+    transform: scale(1.04); 
 }
+ 
 
-/* Badge de capacité sur l'image */
 .card-capacity-badge {
     position:         absolute;
     bottom:           10px;
@@ -319,31 +280,29 @@ a:hover { color: var(--vert-moyen); }
     font-weight:      500;
     padding:          0.25rem 0.65rem;
     border-radius:    50px;
-    backdrop-filter:  blur(4px); /* Effet verre dépoli */
+    backdrop-filter:  blur(4px); 
 }
-
-/* Corps de la carte */
+ 
 .card-body {
     padding:        1.4rem;
-    flex:           1;         /* Prend tout l'espace vertical disponible */
+    flex:           1;         
     display:        flex;
     flex-direction: column;
     gap:            0.75rem;
 }
-
+ 
 .card-title {
     font-family: var(--font-titre);
     font-size:   1.2rem;
     color:       var(--vert-sapin);
 }
-
+ 
 .card-desc {
     font-size: 0.9rem;
     color:     var(--gris-moyen);
-    flex:      1; /* Pousse le footer vers le bas */
+    flex:      1; 
 }
-
-/* Pied de carte : prix à gauche, bouton à droite */
+ 
 .card-footer {
     display:         flex;
     align-items:     center;
@@ -352,7 +311,7 @@ a:hover { color: var(--vert-moyen); }
     padding-top:     0.75rem;
     border-top:      1px solid var(--gris-pale);
 }
-
+ 
 .price-amount {
     font-weight: 700;
     font-size:   1.2rem;
@@ -363,8 +322,8 @@ a:hover { color: var(--vert-moyen); }
     color:     var(--gris-moyen);
     margin-left: 3px;
 }
+ 
 
-/* Bouton de la carte */
 .btn-card {
     background-color: var(--vert-sapin);
     color:            var(--blanc-pur) !important;
@@ -375,17 +334,15 @@ a:hover { color: var(--vert-moyen); }
     transition:       background-color var(--transition);
 }
 .btn-card:hover { background-color: var(--vert-moyen); }
+ 
+ 
 
-
-/* ============================================================
-   8. BADGES ÉQUIPEMENTS (générés par getEquipements())
-============================================================ */
 .equipements-list {
     display:   flex;
-    flex-wrap: wrap; /* Les badges passent à la ligne si besoin */
+    flex-wrap: wrap; 
     gap:       6px;
 }
-
+ 
 .badge-equipement {
     display:          inline-flex;
     align-items:      center;
@@ -399,46 +356,40 @@ a:hover { color: var(--vert-moyen); }
     border:           1px solid #C8DFB0;
     white-space:      nowrap;
 }
-
-
-/* ============================================================
-   9. SECTION AVANTAGES
-============================================================ */
+ 
+ 
 .avantages-section {
     background: var(--vert-sapin);
     padding:    var(--gap-lg) 0;
     color:      var(--blanc-pur);
 }
-
+ 
 .avantages-grid {
     display:               grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap:                   var(--gap-md);
     text-align:            center;
 }
-
+ 
 .avantage-item { padding: 1rem; }
 .avantage-icon { font-size: 2.5rem; display: block; margin-bottom: 0.75rem; }
 .avantage-item h4 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem; }
 .avantage-item p  { font-size: 0.9rem; opacity: 0.8; }
-
-
-/* ============================================================
-   10. FOOTER
-============================================================ */
+ 
+ 
 .site-footer {
     background-color: var(--gris-anthracite);
     color:            #CCCCCC;
     padding-top:      var(--gap-lg);
 }
-
+ 
 .footer-inner {
     display:               grid;
     grid-template-columns: 2fr 1fr 1fr;
     gap:                   var(--gap-lg);
     padding-bottom:        var(--gap-lg);
 }
-
+ 
 .footer-brand .logo-text  { color: var(--blanc-pur); }
 .footer-brand p           { margin-top: 0.75rem; font-size: 0.9rem; line-height: 1.6; }
 .footer-info h4,
@@ -447,7 +398,7 @@ a:hover { color: var(--vert-moyen); }
 .footer-info a,
 .footer-hours a           { color: var(--vert-clair); }
 .footer-hours p           { font-size: 0.9rem; line-height: 1.9; }
-
+ 
 .footer-bottom {
     border-top:  1px solid rgba(255,255,255,0.1);
     text-align:  center;
@@ -455,11 +406,8 @@ a:hover { color: var(--vert-moyen); }
     font-size:   0.82rem;
     color:       #888;
 }
-
-
-/* ============================================================
-   11. PAGE DÉTAIL — Layout à deux colonnes
-============================================================ */
+ 
+ 
 .breadcrumb {
     background-color: var(--blanc-pur);
     border-bottom:    1px solid var(--gris-pale);
@@ -468,19 +416,17 @@ a:hover { color: var(--vert-moyen); }
     color:            var(--gris-moyen);
 }
 .breadcrumb .sep { margin: 0 0.5rem; color: var(--gris-clair); }
-
-/* Layout principal : article + sidebar */
 .detail-layout {
     display:       grid;
-    grid-template-columns: 1fr 380px; /* Sidebar fixe à droite */
+    grid-template-columns: 1fr 380px; 
     gap:           var(--gap-lg);
     padding-top:   var(--gap-lg);
     padding-bottom: var(--gap-xl);
     align-items:   start;
 }
-
-/* Image de l'espace en détail */
+ 
 .detail-image-wrapper {
+    background-color: var(--vert-pale);
     border-radius: var(--radius);
     overflow:      hidden;
     margin-bottom: var(--gap-md);
@@ -491,7 +437,7 @@ a:hover { color: var(--vert-moyen); }
     height:     420px;
     object-fit: cover;
 }
-
+ 
 .detail-header {
     margin-bottom: var(--gap-md);
 }
@@ -515,7 +461,7 @@ a:hover { color: var(--vert-moyen); }
     color:      var(--vert-sapin);
 }
 .meta-price { font-size: 1rem; }
-
+ 
 .detail-description,
 .detail-equipements {
     margin-bottom: var(--gap-md);
@@ -529,20 +475,17 @@ a:hover { color: var(--vert-moyen); }
     padding-bottom: 0.5rem;
     border-bottom: 2px solid var(--vert-pale);
 }
+ 
 
-
-/* ============================================================
-   12. FORMULAIRE DE RÉSERVATION
-============================================================ */
 .resa-card {
     background:    var(--blanc-pur);
     border-radius: var(--radius);
     box-shadow:    var(--shadow-hover);
     overflow:      hidden;
-    position:      sticky; /* La sidebar "colle" lors du scroll */
+    position:      sticky; 
     top:           90px;
 }
-
+ 
 .resa-card-header {
     background:    var(--vert-sapin);
     color:         var(--blanc-pur);
@@ -551,31 +494,27 @@ a:hover { color: var(--vert-moyen); }
 .resa-card-header h3 { font-family: var(--font-titre); font-size: 1.2rem; }
 .resa-price          { margin-top: 0.25rem; font-size: 0.9rem; opacity: 0.85; }
 .resa-price strong   { font-size: 1.3rem; }
-
+ 
 .resa-form { padding: 1.5rem; }
-
-/* Groupe de champ : label + input empilés */
+ 
 .form-group {
     display:       flex;
     flex-direction: column;
     gap:           0.4rem;
     margin-bottom: 1rem;
 }
-
-/* Deux inputs côte à côte */
 .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap:     0.75rem;
 }
-
+ 
 .form-group label {
     font-size:   0.85rem;
     font-weight: 600;
     color:       var(--gris-anthracite);
 }
-
-/* Style commun pour input, select, textarea */
+ 
 .form-group input,
 .form-group select,
 .form-group textarea {
@@ -589,7 +528,7 @@ a:hover { color: var(--vert-moyen); }
     transition:    border-color var(--transition), box-shadow var(--transition);
     width:         100%;
 }
-/* Focus : on accentue la bordure avec la couleur verte */
+
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
@@ -598,8 +537,7 @@ a:hover { color: var(--vert-moyen); }
     box-shadow:   0 0 0 3px rgba(74,124,47,0.15);
     background:   var(--blanc-pur);
 }
-
-/* Bouton de soumission */
+ 
 .btn-submit {
     width:            100%;
     background-color: var(--vert-sapin);
@@ -618,15 +556,14 @@ a:hover { color: var(--vert-moyen); }
     background-color: var(--vert-moyen);
     transform:        translateY(-2px);
 }
-
+ 
 .resa-notice {
     text-align:  center;
     font-size:   0.75rem;
     color:       var(--gris-moyen);
     margin-top:  0.75rem;
 }
-
-/* Bouton retour sous la sidebar */
+ 
 .btn-back {
     display:      block;
     text-align:   center;
@@ -643,11 +580,8 @@ a:hover { color: var(--vert-moyen); }
     background-color: var(--vert-sapin);
     color:            var(--blanc-pur) !important;
 }
+ 
 
-
-/* ============================================================
-   13. ALERTES (succès / erreurs)
-============================================================ */
 .alert {
     padding:       1rem 1.25rem;
     border-radius: var(--radius-sm);
@@ -666,7 +600,7 @@ a:hover { color: var(--vert-moyen); }
     border:           1px solid #F5C6CB;
 }
 .alert-error ul { margin-top: 0.5rem; padding-left: 1.2rem; }
-
+ 
 /* Message vide */
 .no-results {
     text-align:  center;
@@ -674,29 +608,43 @@ a:hover { color: var(--vert-moyen); }
     color:       var(--gris-moyen);
     font-style:  italic;
 }
+ 
+ 
 
-
-/* ============================================================
-   14. RESPONSIVE — Adaptation mobile
-============================================================ */
 @media (max-width: 900px) {
-    /* Le layout détail passe en 1 colonne */
+
     .detail-layout {
         grid-template-columns: 1fr;
     }
-    /* La sidebar n'est plus sticky sur mobile */
-    .resa-card { position: static; }
 
+    .resa-card { position: static; }
+ 
     .footer-inner {
         grid-template-columns: 1fr 1fr;
     }
-
-    .hero-badge { display: none; } /* Masqué sur petits écrans */
+ 
+    .hero-badge { display: none; } 
 }
-
+ 
 @media (max-width: 600px) {
-    .main-nav a:not(.btn-nav) { display: none; } /* Seul le bouton CTA reste */
+    .main-nav a:not(.btn-nav) { display: none; } 
     .footer-inner { grid-template-columns: 1fr; }
     .form-row     { grid-template-columns: 1fr; }
     .hero-text h1 { font-size: 2rem; }
+}
+ 
+ 
+.card-image.img-fallback,
+.detail-image-wrapper.img-fallback {
+    background: linear-gradient(135deg, var(--vert-pale) 0%, #c8dbb0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+}
+.card-image.img-fallback::after,
+.detail-image-wrapper.img-fallback::after {
+    content: '🌿';
+    font-size: 3rem;
+    opacity: 0.5;
 }
